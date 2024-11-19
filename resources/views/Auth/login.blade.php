@@ -1,82 +1,99 @@
-<!-- resources/views/auth/login.blade.php -->
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+<!-- @vite('resources/js/app.js') -->
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            margin: 0;
-        }
+	<title>Login</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        .container {
-            text-align: center;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
-        .btn {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        .btn:hover {
-            background-color: #0056b3;
-        }
+	<link rel="stylesheet" href="{{asset('css/login.css')}}">
 
-        .alert {
-            color: red;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Login</h1>
+	<section class=" ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<!-- <h2 class="heading-section">Login #05</h2> -->
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-7 col-lg-5">
+					<div class="wrap">
+						<div class="img" style="background-image: url('{{ asset("images/wp1.png") }}');"></div>
+						<div class="login-wrap p-4 p-md-5">
+							<div class="d-flex">
+								<div class="w-100">
+									<h3 class="mb-4">Sign In</h3>
+								</div>
+								<!-- <div class="w-100">
+									<p class="social-media d-flex justify-content-end">
+										<a href="#"
+											class="social-icon d-flex align-items-center justify-content-center"><span
+												class="fa fa-facebook"></span></a>
+										<a href="#"
+											class="social-icon d-flex align-items-center justify-content-center"><span
+												class="fa fa-twitter"></span></a>
+									</p>
+								</div> -->
+							</div>
+							<form action="{{route('login')}}" class="signin-form" method="POST">
+								@csrf
+								<div class="form-group mt-3">
+									<input type="text" class="form-control" id="login" name="login" required
+										value="{{ old('login') }}" autocomplete="off">
+									<label class="form-control-placeholder" for="login">Username/Email</label>
+								</div>
+								@error('login')
+									<div>{{ $message }}</div>
+								@enderror
+								@error('password')
+									<div>{{ $message }}</div>
+								@enderror
+								<div class="form-group">
+									<input id="password" type="password" class="form-control" name="password" required>
 
-        <!-- Menampilkan error login jika ada -->
-        @if ($errors->any())
-        <div class="alert">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
+									<label class="form-control-placeholder" for="password">Password</label>
+									<span toggle="#password-field"
+										class="fa fa-fw fa-eye field-icon toggle-password"></span>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign
+										In</button>
+								</div>
+								<div class="form-group d-md-flex">
+									<div class="w-50 text-left">
+										<label class="checkbox-wrap checkbox-primary mb-0">Remember Me
+											<input type="checkbox" checked>
+											<span class="checkmark"></span>
+										</label>
+									</div>
+									<div class="w-50 text-md-right">
+										<a href="#">Forgot Password</a>
+									</div>
+								</div>
+							</form>
+							<p class="text-center">Not a member? <a 
+									href="{{ route('register') }}">Sign
+									Up</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-            <div>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required value="{{ old('email') }}">
-            </div>
-            <div>
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn">Login</button>
-        </form>
+	<script src="{{asset('js/jquery.min.js')}}"></script>
+	<script src="{{asset('js/popper.js')}}"></script>
+	<script src="{{asset('js/bootstrap.min.js')}}"></script>
+	<script src="{{asset('js/login.js')}}"></script>
 
-        <p>Don't have an account? <a href="{{ route('register') }}">Register here</a></p>
-    </div>
 </body>
 
 </html>

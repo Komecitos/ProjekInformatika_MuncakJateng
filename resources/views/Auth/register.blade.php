@@ -1,90 +1,68 @@
-<!-- resources/views/auth/register.blade.php -->
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            margin: 0;
-        }
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SignUp</title>
 
-        .container {
-            text-align: center;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
 
-        .btn {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        .btn:hover {
-            background-color: #0056b3;
-        }
-
-        .alert {
-            color: red;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-    </style>
+    <!-- Main css -->
+    <link rel="stylesheet" href="{{asset('css/register.css')}}">
 </head>
 
 <body>
-    <div class="container">
-        <h1>Register</h1>
 
-        <!-- Menampilkan error validasi jika ada -->
-        @if ($errors->any())
-        <div class="alert">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
+    <div class="main">
 
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
-            <div>
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required value="{{ old('name') }}">
+        <section class="signup">
+            <!-- <img src="{{asset('images/wp1.png')}}" alt=""> -->
+            <div class="container">
+                <div class="signup-content">
+                    <form method="POST" action="{{route('register')}}" class="signup-form">
+                        @csrf
+                        <h2 class="form-title" style="font-family: 'Roboto';">Create account</h2>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="name" id="name" placeholder="Your Name"
+                                value="{{ old('name') }}" />
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-input" name="email" id="email" placeholder="Your Email"
+                                value="{{ old('email') }}" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-input" name="password" id="password"
+                                placeholder="Password" />
+                            <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-input" name="password_confirmation"
+                                id="password_confirmation" placeholder="Repeat your password" />
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                            <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all
+                                statements in <a href="#" class="term-service">Terms of service</a></label>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up" />
+                        </div>
+                    </form>
+                    <p class="loginhere">
+                        Have already an account ? <a href="{{route('login')}}" class="loginhere-link">Login here</a>
+                    </p>
+                </div>
             </div>
-            <div>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required value="{{ old('email') }}">
-            </div>
-            <div>
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div>
-                <label for="password_confirmation">Confirm Password:</label>
-                <input type="password" id="password_confirmation" name="password_confirmation" required>
-            </div>
-            <button type="submit" class="btn">Register</button>
-        </form>
+        </section>
 
-        <p>Already have an account? <a href="{{ route('login') }}">Login here</a></p>
     </div>
-</body>
+
+    <!-- JS -->
+    <script src="{{asset('/jquery.min.js')}}"></script>
+    <script src="{{asset('js/main.js')}}"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 
 </html>

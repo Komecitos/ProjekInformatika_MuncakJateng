@@ -18,25 +18,27 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         // Validasi inputan
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required', 'min:6'],
+        $request->validate([
+            'login' => 'required|string', // Kolom untuk login (email atau name)
+            'password' => 'required|string|min:8',   // Validasi untuk password
         ]);
 
-        // Cek kredensial pengguna
-        if (Auth::attempt($credentials)) {
-            // Jika login berhasil, redirect ke halaman home
-            return redirect()->intended(route('home'));
+        // Memeriksa apakah inputan login adalah email atau nama
+        $loginField = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+
+        // Coba login dengan email atau name
+        if (Auth::attempt([$loginField => $request->login, 'password' => $request->password])) {
+            return redirect()->intended('/home');  // Arahkan ke halaman home setelah login berhasil
         }
 
-        // Jika gagal, kembalikan ke halaman login dengan pesan error
+        // Jika login gagal
         return back()->withErrors([
-            'email' => 'The provided credentials are incorrect.',
+            'login' => 'The provided credentials are incorrect.',
         ]);
     }
 
     // Logout
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
         return redirect('/');

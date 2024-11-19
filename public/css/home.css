@@ -1,0 +1,51 @@
+/* body { */
+/* background-color: cadetblue; */
+/* } */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    /* color: rgb(19, 107, 127); */
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    /* Transparansi */
+    /* padding: 40px 60px; */
+    /* border-radius: 15px; */
+    backdrop-filter: blur(10px);
+    /* Efek blur untuk Glassmorphism */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+}
+
+header .logo img {
+    height: 40px;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #ecf0f1;
+}
