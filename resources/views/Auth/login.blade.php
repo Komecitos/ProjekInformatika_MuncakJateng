@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<!-- @vite('resources/js/app.js') -->
+@vite('resources/js/app.js')
 
 <head>
 	<title>Login</title>
@@ -32,16 +32,6 @@
 								<div class="w-100">
 									<h3 class="mb-4">Sign In</h3>
 								</div>
-								<!-- <div class="w-100">
-									<p class="social-media d-flex justify-content-end">
-										<a href="#"
-											class="social-icon d-flex align-items-center justify-content-center"><span
-												class="fa fa-facebook"></span></a>
-										<a href="#"
-											class="social-icon d-flex align-items-center justify-content-center"><span
-												class="fa fa-twitter"></span></a>
-									</p>
-								</div> -->
 							</div>
 							<form action="{{route('login')}}" class="signin-form" method="POST">
 								@csrf
@@ -51,10 +41,10 @@
 									<label class="form-control-placeholder" for="login">Username/Email</label>
 								</div>
 								@error('login')
-									<div>{{ $message }}</div>
+								<div>{{ $message }}</div>
 								@enderror
 								@error('password')
-									<div>{{ $message }}</div>
+								<div>{{ $message }}</div>
 								@enderror
 								<div class="form-group">
 									<input id="password" type="password" class="form-control" name="password" required>
@@ -79,7 +69,7 @@
 									</div>
 								</div>
 							</form>
-							<p class="text-center">Not a member? <a 
+							<p class="text-center">Not a member? <a
 									href="{{ route('register') }}">Sign
 									Up</a></p>
 						</div>

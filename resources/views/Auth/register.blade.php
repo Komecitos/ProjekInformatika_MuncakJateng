@@ -16,6 +16,14 @@
 
 <body>
 
+    <!-- Error Modal -->
+    <div id="errorModal" style="display: none;">
+        <div class="modal-content">
+            <span id="closeModal">&times;</span>
+            <ul id="errorMessages"></ul>
+        </div>
+    </div>
+
     <div class="main">
 
         <section class="signup">
@@ -61,8 +69,12 @@
     </div>
 
     <!-- JS -->
+    <script>
+
+    </script>
+
     <script src="{{asset('/jquery.min.js')}}"></script>
-    <script src="{{asset('js/main.js')}}"></script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+    <script src="{{asset('js/register.js')}}"></script>
+</body>
 
 </html>

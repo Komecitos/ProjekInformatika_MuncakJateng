@@ -1,18 +1,22 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Http\Middleware;
 
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RedirectIfEmailNotVerified
 {
-    public function handle(Registered $event)
+    public function handle(Request $request, Closure $next)
     {
-        // Jika pengguna belum verifikasi, arahkan ke halaman verifikasi
-        if (!$event->user->hasVerifiedEmail()) {
+        // Check if the user is logged in and hasn't verified their email
+        if (Auth::check() && !Auth::user()->hasVerifiedEmail()) {
+            // Redirect to the verification notice page
             return redirect()->route('verification.notice');
         }
+
+        // Allow request to proceed if email is verified
+        return $next($request);
     }
 }
