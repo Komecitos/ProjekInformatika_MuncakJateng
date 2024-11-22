@@ -16,9 +16,12 @@ body {
     /* align-items: center; */
     height: 100vh;
     /* background-color: #1c1a1a; */
+
+    background-image: url('{{ asset(" images/wp1.png") }}');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    
 
 }
 
@@ -48,7 +51,8 @@ header {
 }
 
 header .logo img {
-    height: 40px;
+    height: 50px;
+    height: auto;
 }
 
 nav ul {

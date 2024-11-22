@@ -214,6 +214,8 @@ figure {
 img {
   vertical-align: middle;
   border-style: none;
+
+  background-image: url('{{ asset(" images/wp1.png") }}');
 }
 
 svg {
