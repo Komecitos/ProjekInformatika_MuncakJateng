@@ -4,206 +4,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ asset(path: "images/muncak.png") }}" type="image/x-icon">
     <title>Home</title>
-    <!-- Link ke Bootstrap CSS -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KyZXEJv3pN4v2hf3swg9v7qNYyHsXe7tJ2g5KUbQ75N+4bG7B+X1eIu3YmStdr7m" crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans|Varela+Round">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="{{ asset('css/home.css' )}}">
+    <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
 </head>
+<style>
+    #main {
+        display: flex;
+        flex-direction: column;
+
+        height: 100vh;
+    }
+</style>
 
 <body>
-    <!-- Header Section -->
-    <header>
-        <div class="logo">
-            <a href="{{ route('home') }}">
-                <img src="{{ asset('images/muncak.png') }}" alt="Logo">
-            </a>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="{{ route('login') }}">Profil</a></li>
-                <li><a href="">Pesanan</a></li>
-                <li><a href="{{ route('ticket') }}">Tiket</a></li>
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <li><button type="submit" class="logout-button">Logout</button></li>
-                </form>
-            </ul>
-        </nav>
-    </header>
-
-    <section>
-        <div class="container">
-            <h1>Home</h1>
-            <div class="container-xl">
+    <section id="main" style="background-image: url('{{ asset(path: "images/mounts/merbabu2.jpg") }}'); background-size: cover;  background-repeat: no-repeat;">
+        @include ('layouts.header')
+        <section class="py-5 text-center text-white h-100 align-items-center d-flex" id="main2">
+            <div class="container py-5">
                 <div class="row">
-                    <div class="col-md-10 mx-auto">
-                        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-                            <!-- Carousel indicators -->
-                            <ol class="carousel-indicators">
-                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#myCarousel" data-slide-to="1"></li>
-                                <li data-target="#myCarousel" data-slide-to="2"></li>
-                            </ol>
-                            <!-- Wrapper for carousel items -->
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper">
-                                                <div class="img-box">
-                                                    <img src="/examples/images/cities/london.png" class="img-fluid" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>London</h4>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam.</p>
-                                                    <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper">
-                                                <div class="img-box">
-                                                    <img src="/examples/images/cities/new-york.png" class="img-fluid" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>New York</h4>
-                                                    <p>Vivamus fermentum in arcu in aliquam. Quisque aliqua porta odio in fringilla vivamus.</p>
-                                                    <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper">
-                                                <div class="img-box">
-                                                    <img src="/examples/images/cities/paris.png" class="img-fluid" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Paris</h4>
-                                                    <p>Convallis eget pretium eu, bibendum non leo. Proin susc ipit purus adipiscing dolor.</p>
-                                                    <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper">
-                                                <div class="img-box">
-                                                    <img src="/examples/images/cities/kuala-lumpur.png" class="img-fluid" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Kuala Lumpur</h4>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam.</p>
-                                                    <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper">
-                                                <div class="img-box">
-                                                    <img src="/examples/images/cities/agra.png" class="img-fluid" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Agra</h4>
-                                                    <p>Vivamus fermentum in arcu in aliquam. Quisque aliqua porta odio in fringilla vivamus.</p>
-                                                    <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper">
-                                                <div class="img-box">
-                                                    <img src="/examples/images/cities/dubai.png" class="img-fluid" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Dubai</h4>
-                                                    <p>Convallis eget pretium eu, bibendum non leo. Proin susc ipit purus adipiscing dolor.</p>
-                                                    <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper">
-                                                <div class="img-box">
-                                                    <img src="/examples/images/cities/rio-de-janeiro.png" class="img-fluid" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Rio De Janeiro</h4>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam.</p>
-                                                    <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper">
-                                                <div class="img-box">
-                                                    <img src="/examples/images/cities/giza.png" class="img-fluid" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Giza</h4>
-                                                    <p>Vivamus fermentum in arcu in aliquam. Quisque aliqua porta odio in fringilla vivamus.</p>
-                                                    <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper">
-                                                <div class="img-box">
-                                                    <img src="/examples/images/cities/sydney.png" class="img-fluid" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Sydney</h4>
-                                                    <p>Convallis eget pretium eu, bibendum non leo. Proin susc ipit purus adipiscing dolor.</p>
-                                                    <a href="#" class="btn btn-primary">More <i class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Carousel controls -->
-                            <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-                                <i class="fa fa-angle-left"></i>
+                    <div class="mx-auto col-lg-8 col-md-8 offset-md-2">
+                        <h3 class="display-3"><b>Muncak Jateng</b></h3>
+                        <p class="lead mb-5"><b>" Pendakian adalah bentuk nyata dari menikmati proses dan mendapatkan keindahan
+                                hasilnya " <i>Komecitos dev</i></b></p> <a href="#01" class="btn btn-lg btn-primary mx-0">Mulai</a> <a
+                            class="btn btn-lg btn-outline-primary mx-0" href="#main4">Mendaki</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="hero" id="main3">
+            <div class="py-5 px-0">
+                <div class="container" id="main4">
+                    <div class="row">
+                        <div class="col-md-12" id="01">
+                            <h1 class="text-center text-dark" contenteditable="true"><b>Jelajahi indahnya pegunungan Jawa Tengah</b>
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center my-2"><a id="start" class="btn btn-outline-primary mb-3 btn-lg" href="{{route('ticket')}}">Pesan Tiket</a></div>
+                    </div>
+                    <div class="gallery">
+                        <div class="gallery-item">
+                            <img src="{{ asset('images/mounts/Gunung Bismo.jpg') }}" alt="Gunung Bismo">
+                            <div class="caption">Gunung Bismo</div>
+                        </div>
+                        <div class="gallery-item">
+                            <a href="{{ route('mount.show', 'prau') }}">
+                                <img src="{{ asset('images/mounts/Gunung Prau.jpg') }}" alt="Gunung Prau">
+                                <div class="caption">Gunung Prau</div>
                             </a>
-                            <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-                                <i class="fa fa-angle-right"></i>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="{{ asset('images/mounts/Gunung Slamet.jpg') }}" alt="Gunung Slamet">
+                            <div class="caption">Gunung Slamet</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="{{ asset('images/mounts/Gunung Sumbing.jpg') }}" alt="Gunung Sumbing">
+                            <div class="caption">Gunung Sumbing</div>
+                        </div>
+                        <div class="gallery-item">
+                            <a href="{{ route('mount.show', 'lawu') }}">
+                                <img src="{{ asset('images/mounts/lawu.jpg') }}" alt="Gunung Lawu">
+                                <div class="caption">Gunung Lawu</div>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="py-5 px-1 pl-0 pr-0">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header"> Quote </div>
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                        <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite>
+                                        </footer>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+        <div class="py-3 bg-primary text-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p class="mb-0">© Projek Informatika Universitas Sanata Dharma</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 My Platform. All rights reserved.</p>
-            <p><a href="/terms" class="text-dark">Terms of Service</a> | <a href="/privacy" class="text-dark">Privacy
-                    Policy</a></p>
-        </div>
-    </footer>
-
-    <!-- Link ke Bootstrap JS dan Popper -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz4fnFO9gybR1sV9gF7iG3fF3pK5Y7aXjxw3v/Sc5t9Me64FQ+IpxbZ0tM"
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
-        integrity="sha384-c6z5t9l0Cvfoz7O0Ll4US7yJ9wVmAszJSSTuD7jjk+04F1L6d00j3z5JfA1eq/e"
-        crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+
 </body>
 
 </html>

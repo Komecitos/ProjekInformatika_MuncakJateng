@@ -33,7 +33,7 @@ class LoginController extends Controller
 
         // Jika login gagal
         return back()->withErrors([
-            'login' => 'The provided credentials are incorrect.',
+            'login' => 'Email atau password salah',
         ]);
     }
 
