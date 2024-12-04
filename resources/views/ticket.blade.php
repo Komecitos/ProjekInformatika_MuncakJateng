@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    @include('layouts.header')
     <h1>Ticket Page</h1>
 </body>
 

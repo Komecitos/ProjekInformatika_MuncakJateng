@@ -19,8 +19,8 @@ class LoginController extends Controller
     {
         // Validasi inputan
         $request->validate([
-            'login' => 'required|string', // Kolom untuk login (email atau name)
-            'password' => 'required|string|min:8',   // Validasi untuk password
+            'login' => 'required|string',
+            'password' => 'required|string|min:8',
         ]);
 
         // Memeriksa apakah inputan login adalah email atau nama
@@ -31,9 +31,8 @@ class LoginController extends Controller
             return redirect()->intended('/home');  // Arahkan ke halaman home setelah login berhasil
         }
 
-        // Jika login gagal
         return back()->withErrors([
-            'login' => 'The provided credentials are incorrect.',
+            'login' => 'Email atau password salah',
         ]);
     }
 

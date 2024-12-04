@@ -1,89 +1,88 @@
-<!doctype html>
-<html lang="en">
-@vite('resources/js/app.js')
+<!DOCTYPE html>
+<html>
 
 <head>
-	<title>Login</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-	<link rel="stylesheet" href="{{asset('css/login.css')}}">
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>login</title>
+    <link rel="shortcut icon" href="{{ asset(path: "images/muncak.png") }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+    <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
 </head>
 
-<body>
-	<section class=" ftco-section">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-6 text-center mb-5">
-					<!-- <h2 class="heading-section">Login #05</h2> -->
-				</div>
-			</div>
-			<div class="row justify-content-center">
-				<div class="col-md-7 col-lg-5">
-					<div class="wrap">
-						<div class="img"></div>
-						<div class="login-wrap p-4 p-md-5">
-							<div class="d-flex">
-								<div class="w-100">
-									<h3 class="mb-4">Sign In</h3>
-								</div>
-							</div>
-							<form action="{{route('login')}}" class="signin-form" method="POST">
-								@csrf
-								<div class="form-group mt-3">
-									<input type="text" class="form-control" id="login" name="login" required
-										value="{{ old('login') }}" autocomplete="off">
-									<label class="form-control-placeholder" for="login">Username/Email</label>
-								</div>
-								@error('login')
-								<div>{{ $message }}</div>
-								@enderror
-								@error('password')
-								<div>{{ $message }}</div>
-								@enderror
-								<div class="form-group">
-									<input id="password" type="password" class="form-control" name="password" required>
+<body style="background-image: url('{{ asset(path: "images/mounts/merbabu2.jpg") }}'); background-size: cover;  background-repeat: no-repeat;">
+    <nav class=" navbar navbar-expand-md navbar-light sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz sticky-top" style="">
+        <div class="container">
+            <a href="{{ route('welcome') }}"><img src="{{ asset(path: "images/muncak.png") }}" alt="logo" style="height: 40px; width: auto;"></a>
+            <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar4">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar4">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item text-primary"> <a class="nav-link text-primary" href="{{ route('register') }}">Daftar</a> </li>
+                    <li class="nav-item text-primary"> <a class="nav-link text-primary" href="#">Panduan</a> </li>
+                    <li class="nav-item"> <a class="nav-link text-primary" href="#">About</a> </li>
+                    <a class="btn navbar-btn ml-md-2 btn-primary text-light" href="{{ route('login') }}">Masuk</a>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="py-5 text-center">
+        <div class="container">
+            <div class="row">
+                <div class="mx-auto col-md-5 col-10 rounded border p-4 " style="background: rgba(255,255,255,0.2);
+                    backdrop-filter: blur(16px);
+                    -webkit-backdrop-filter: blur(16px);
+                    border: 1px solid rgba(255,255,255,0.18);
+                    box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+                    border-radius: 10px;
+                    border: 1px solid rgba(255,255,255,0.18);">
+                    <img class="img-fluid d-block img-thumbnail w-25 mt-0 mx-auto" src="{{ asset(path: "images/muncak.png") }}">
+                    <h3 class="display-4 text-primary"><b>Log in</b></h3>
 
-									<label class="form-control-placeholder" for="password">Password</label>
-									<span toggle="#password-field"
-										class="fa fa-fw fa-eye field-icon toggle-password"></span>
-								</div>
-								<div class="form-group">
-									<button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign
-										In</button>
-								</div>
-								<div class="form-group d-md-flex">
-									<div class="w-50 text-left">
-										<label class="checkbox-wrap checkbox-primary mb-0">Remember Me
-											<input type="checkbox" checked>
-											<span class="checkmark"></span>
-										</label>
-									</div>
-									<div class="w-50 text-md-right">
-										<a href="#">Forgot Password</a>
-									</div>
-								</div>
-							</form>
-							<p class="text-center">Not a member? <a
-									href="{{ route('register') }}">Sign
-									Up</a></p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+                    <form action="{{route('login')}}" method="post">
+                        @csrf
+                        <div class="form-group"> <input type="text" class="form-control" placeholder="Email/username" style="" required="required" id="login" name="login" required
+                                value="{{ old('login') }}" autocomplete="off"> </div>
+                        <div class="form-group mb-3"> <input type="password" class="form-control" placeholder="Password" id="password" name="password" required="required"> <small class="form-text text-muted text-right">
+                                <a href="#"> Recover password</a>
+                            </small> </div> <button type="submit" class="btn btn-primary"><b style="">Masuk</b></button>
+                    </form>
 
-	<script src="{{asset('js/jquery.min.js')}}"></script>
-	<script src="{{asset('js/popper.js')}}"></script>
-	<script src="{{asset('js/bootstrap.min.js')}}"></script>
-	<script src="{{asset('js/login.js')}}"></script>
-
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        @if ($errors->has('login') || $errors->has('password') || $errors->has('email'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal masuk',
+                    width: '300px',
+                    heigth: '200px',
+                    html: `
+                            @if ($errors->has('login'))
+                            <p>{{ $errors->first('login') }}</p>
+                            @endif
+                            @if ($errors->has('password'))
+                            <p>{{ $errors->first('password') }}</p>
+                            @endif
+                            @if ($errors->has('email'))
+                            <p>{{ $errors->first('email') }}</p>
+                            @endif
+                            `,
+                });
+            });
+        </script>
+        @endif
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -4,14 +4,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\RegisterController;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\WeatherController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\TicketController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use App\Notifications\WelcomeEmail;
 use App\Notifications\EmailVerifiedPushNotification;
+use App\Http\Controllers\MountainController;
+
 
 
 // $request->user()->markEmailAsVerified();
@@ -32,7 +35,9 @@ Route::get('/welcome', function () {
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 
-Route::get('ticket', [TicketController::class, 'showTicketPage'])->name('ticket');
+Route::get('/ticket', [TicketController::class, 'index'])->name('ticket.index');
+
+Route::get('/gunung/{mount}', [MountainController::class, 'show'])->name('mount.show');
 
 Route::post('login', [LoginController::class, 'login']);
 
@@ -86,3 +91,11 @@ Route::get('/send-email', [EmailController::class, 'sendEmail']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('home');
+
+// weatherApi
+Route::get('/weather/current/{location}', [WeatherController::class, 'getCurrentWeather']);
+Route::get('/weather/forecast/{location}', [WeatherController::class, 'getForecast']);
+Route::get('/weather/mountain', [WeatherController::class, 'getWeatherLawu'])->name('weather.mountain');
+
+// OpenWeather API
+Route::get('/weather/mountain/{latitude}/{longitude}/{location}', [WeatherController::class, 'getWeather'])->name('openWeather');

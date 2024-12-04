@@ -10,7 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <script src="{{ asset('js/welcome.js') }}"></script>
 
 </head>
@@ -18,7 +18,7 @@
 <body>
     <!-- Header Section -->
     <header>
-        <div class=" logo">
+        <div class="logo">
             <a href="{{route('welcome')}}"><img src="{{asset('images/muncak.png')}}" alt="Logo"></a>
         </div>
         <nav>
@@ -32,7 +32,7 @@
 
     <!-- Main Content -->
     <main>
-        <div class="container1">
+        <div style="background-image: url('{{ asset("images/wp1.png") }}');" class="container1">
             <div class="welcome">
                 <h1>Muncak jateng</h1>
                 <p>Selamat datang di platform pendakian kami! Siapkan
