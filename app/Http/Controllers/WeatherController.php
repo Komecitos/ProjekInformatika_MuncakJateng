@@ -93,11 +93,11 @@ class WeatherController extends Controller
             }
 
             // Menambahkan rekomendasi yang lebih rinci
-            if ($weather === 'Clear' && $temp > 15 && $temp < 25 && $wind < 10 && $rain == 0) {
-                $note .= 'Cuaca ideal untuk pendakian.';
-            } else {
-                $note .= 'Hindari pendakian jika memungkinkan.';
-            }
+            // if ($weather === 'Clear' && $temp > 15 && $temp < 25 && $wind < 10 && $rain == 0) {
+            //     $note .= 'Cuaca ideal untuk pendakian.';
+            // } else {
+            //     $note .= 'Hindari pendakian jika memungkinkan.';
+            // }
 
             $recommendations[$date] = $note;
         }

@@ -42,22 +42,24 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 text-center my-2"><a id="start" class="btn btn-outline-primary mb-3 btn-lg" href="{{route('ticket')}}">Pesan Tiket</a></div>
+                        <div class="col-md-12 text-center my-2"><a id="start" class="btn btn-outline-primary mb-3 btn-lg" href="{{route('ticket.index')}}">Pesan Tiket</a></div>
                     </div>
                     <div class="gallery">
                         <div class="gallery-item">
                             <img src="{{ asset('images/mounts/Gunung Bismo.jpg') }}" alt="Gunung Bismo">
-                            <div class="caption">Gunung Bismo</div>
+                            <div class="caption">Gunung Merbabu</div>
                         </div>
                         <div class="gallery-item">
                             <a href="{{ route('mount.show', 'prau') }}">
                                 <img src="{{ asset('images/mounts/Gunung Prau.jpg') }}" alt="Gunung Prau">
-                                <div class="caption">Gunung Prau</div>
+                                <div class="caption">Gunung Sindoro</div>
                             </a>
                         </div>
                         <div class="gallery-item">
-                            <img src="{{ asset('images/mounts/Gunung Slamet.jpg') }}" alt="Gunung Slamet">
-                            <div class="caption">Gunung Slamet</div>
+                            <a href="{{route('mount.show', 'slamet')}}">
+                                <img src="{{ asset('images/mounts/Gunung Slamet.jpg') }}" alt="Gunung Slamet">
+                                <div class="caption">Gunung Slamet</div>
+                            </a>
                         </div>
                         <div class="gallery-item">
                             <img src="{{ asset('images/mounts/Gunung Sumbing.jpg') }}" alt="Gunung Sumbing">

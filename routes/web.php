@@ -35,7 +35,7 @@ Route::get('/welcome', function () {
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 
-Route::get('ticket', [TicketController::class, 'showTicketPage'])->name('ticket');
+Route::get('/ticket', [TicketController::class, 'index'])->name('ticket.index');
 
 Route::get('/gunung/{mount}', [MountainController::class, 'show'])->name('mount.show');
 

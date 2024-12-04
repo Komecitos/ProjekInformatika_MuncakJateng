@@ -11,7 +11,7 @@
 </style>
 
 <body>
-    <nav class="navbar navbar-expand-md  fixed-top  ">
+    <nav class="navbar navbar-expand-md bg-white fixed-top  ">
         <div class="container"> <a class="" href="{{ route(name: 'home') }}">
                 <img src="{{ asset(path: 'images/muncak.png ') }}" alt="" style="width: 50px; height: auto;">
             </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
@@ -20,7 +20,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbar4">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item" style=""> <a class="nav-link" href="#"><b style="" class=""><span
+                    <li class="nav-item" style=""> <a class="nav-link" href="{{route(name: 'ticket.index')}}"><b style="" class=""><span
                                     style="font-weight: normal;">Tiket</span></b></a> </li>
                     <li class="nav-item"> <a class="nav-link" href="#"><b class=""><span
                                     style="font-weight: normal;">Pesanan</span></b></a> </li>

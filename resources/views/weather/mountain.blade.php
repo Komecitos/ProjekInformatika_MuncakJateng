@@ -78,9 +78,9 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">Data Cuaca:</td>
-                        <td>{{ $day['main']['temp_max'] }} °C</td>
-                        <td>{{ $day['main']['temp_min'] }} °C</td>
-                        <td>{{ $day['main']['humidity'] }} %</td>
+                        <td>{{ $day['main']['temp_max'] }}°C</td>
+                        <td>{{ $day['main']['temp_min'] }}°C</td>
+                        <td>{{ $day['main']['humidity'] }}%</td>
                         <td>{{ $day['main']['pressure'] }} hPa</td>
                         <td>{{ $day['visibility'] ?? 'N/A' }} m</td>
                         <td>{{ $day['wind']['speed'] }} m/s</td>
