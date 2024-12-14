@@ -1,0 +1,246 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 200;
+
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+    height: 100vh;
+    /* background-color: #1c1a1a; */
+
+
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    color: rgb(24, 112, 100);
+    background-color: white;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+}
+
+.logo img {
+    width: 50px;
+    height: auto;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: rgb(24, 112, 100);
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #24abcd;
+}
+
+main {
+    text-align: center;
+    /* padding: 50px; */
+    /* background-color: #ecf0f1; */
+    /* margin-top: 20px; */
+
+    position: relative;
+
+}
+
+footer {
+    position: relative;
+    text-align: center;
+    padding: 10px;
+    background-color: #068086;
+    color: white;
+    margin-top: 20px;
+}
+
+/* Konten utama1 */
+
+.container1 {
+    display: flex;
+    flex-direction: row;
+    /* justify-items: center; */
+
+    height: 550px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    padding: 200px 100px 100px 100px;
+    margin-top: 0;
+}
+
+@media (max-width: 768px) {
+    .container1 {
+        padding: 0 20px 50px 20px;
+        /* Adjust padding for small screens */
+        margin-top: 60px;
+        /* Adjust top margin for smaller screens */
+    }
+}
+
+.container2 {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* background-color: aquamarine; */
+}
+
+.welcome {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 500px;
+    /* border: 1px solid black;  */
+    align-items: center;
+    color: white;
+
+    margin-right: 100px;
+}
+
+
+
+.welcome .button {
+    margin: 10px;
+    width: 130px;
+    height: 40px;
+    background-color: #1f73c800;
+    border-radius: 15px;
+    border-color: #2c3e50;
+    color: black;
+
+    background: rgba(255, 255, 255, 0.1);
+    /* transparansi putih */
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    /* efek blur di belakang kontainer */
+    -webkit-backdrop-filter: blur(10px);
+    /* kompatibilitas Safari */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* bayangan lembut */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* border dengan transparansi */
+    color: white;
+    /* teks berwarna putih */
+    font-family: 'Roboto', sans-serif;
+    /* font yang digunakan */
+    overflow: hidden;
+    /* memastikan elemen yang meluap tidak tampak */
+}
+
+.carousel-container {
+    position: relative;
+    width: 80%;
+    overflow: hidden;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+    gap: 5px;
+
+    /* margin-bottom: 100px; */
+
+}
+
+.carousel-item {
+    width: 200px;
+    height: 300px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+
+    color: white;
+    margin: 20px;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+
+    background: rgba(255, 255, 255, 0.1);
+    /* transparansi putih */
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    /* efek blur di belakang kontainer */
+    -webkit-backdrop-filter: blur(10px);
+    /* kompatibilitas Safari */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* bayangan lembut */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* border dengan transparansi */
+    color: white;
+    /* teks berwarna putih */
+    font-family: 'Roboto', sans-serif;
+    /* font yang digunakan */
+    overflow: hidden;
+    /* memastikan elemen yang meluap tidak tampak */
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0);
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 50%;
+    z-index: 10;
+    ;
+}
+
+.carousel-img {
+    object-fit: cover;
+    width: 100%;
+    height: 250px;
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
+
+/* Active item in the center

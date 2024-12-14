@@ -39,6 +39,7 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+            'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
     ],
 
@@ -63,6 +64,7 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
+            'key' => 'name',  // Ganti kolom `email` menjadi `name`
         ],
 
         // 'users' => [

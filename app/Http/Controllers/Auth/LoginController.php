@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
@@ -17,27 +19,41 @@ class LoginController extends Controller
     // Proses login
     public function login(Request $request)
     {
+        Log::info('Proses login dimulai.', ['data' => $request->except('password')]);
+
         // Validasi inputan
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required', 'min:6'],
+        $validator = Validator::make($request->all(), [
+            'login' => 'required|string',
+            'password' => 'required|string|min:8',
         ]);
 
-        // Cek kredensial pengguna
-        if (Auth::attempt($credentials)) {
-            // Jika login berhasil, redirect ke halaman home
-            return redirect()->intended(route('home'));
+        if ($validator->fails()) {
+            Log::warning('Validasi input login gagal.', ['errors' => $validator->errors()]);
+            return back()->withErrors($validator)->withInput();
         }
 
-        // Jika gagal, kembalikan ke halaman login dengan pesan error
+        // Menentukan apakah input login adalah email atau nama
+        $loginField = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+
+        Log::info('Field login terdeteksi.', ['login_field' => $loginField]);
+
+        // Coba login
+        if (Auth::attempt([$loginField => $request->login, 'password' => $request->password])) {
+            Log::info('Login berhasil.', ['user_id' => Auth::id()]);
+            return redirect()->intended('/ticket');
+        }
+
+        Log::error('Login gagal.', ['login' => $request->login]);
+
         return back()->withErrors([
-            'email' => 'The provided credentials are incorrect.',
-        ]);
+            'login' => 'Email atau password salah',
+        ])->withInput();
     }
 
     // Logout
-    public function logout()
+    public function logout(Request $request)
     {
+        Log::info('Logout dilakukan oleh user.', ['user_id' => Auth::id()]);
         Auth::logout();
         return redirect('/');
     }
