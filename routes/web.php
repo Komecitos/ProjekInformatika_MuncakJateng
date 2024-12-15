@@ -7,6 +7,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\WeatherController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\TicketController;
+
+use App\Models\Gunung;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
@@ -14,16 +16,6 @@ use Illuminate\Support\Facades\URL;
 use App\Notifications\WelcomeEmail;
 use App\Notifications\EmailVerifiedPushNotification;
 use App\Http\Controllers\MountainController;
-
-
-
-// $request->user()->markEmailAsVerified();
-// $request->user()->notify(new WelcomeEmail());
-
-// $request->user()->markEmailAsVerified();
-// $request->user()->notify(new EmailVerifiedPushNotification());
-
-
 
 Route::get('/', function () {
     return view('welcome');
@@ -34,8 +26,6 @@ Route::get('/welcome', function () {
 })->name('welcome');
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-
-Route::get('/ticket', [TicketController::class, 'index'])->name('ticket.index');
 
 Route::get('/gunung/{mount}', [MountainController::class, 'show'])->name('mount.show');
 
@@ -99,3 +89,23 @@ Route::get('/weather/mountain', [WeatherController::class, 'getWeatherLawu'])->n
 
 // OpenWeather API
 Route::get('/weather/mountain/{latitude}/{longitude}/{location}', [WeatherController::class, 'getWeather'])->name('openWeather');
+
+
+Route::get('/ticket', [TicketController::class, 'index'])->name('ticket.index');
+Route::get('/ticket/pemesanan/{id}', [TicketController::class, 'pemesanan'])->name('ticket.pemesanan');
+Route::post('/ticket/store', [TicketController::class, 'store'])->name('ticket.store');
+Route::get('/tickets/{id}', [TicketController::class, 'show'])->name('ticket.show');
+
+Route::get('/gunung', function () {
+    $gunungData = Gunung::all();  // Mengambil semua gunung
+    return view('yourView', compact('gunungData'));
+});
+
+// Rute untuk mengambil jalur via berdasarkan nama_gunung
+Route::get('/gunung/{nama_gunung}/jalur', function ($nama_gunung) {
+    // Mengambil data via berdasarkan nama_gunung
+    $vias = Gunung::where('nama_gunung', $nama_gunung)->get(['id_via', 'nama_via']);
+
+    // Mengembalikan data via yang terkait dengan nama_gunung
+    return response()->json($vias);
+});
