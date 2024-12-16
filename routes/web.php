@@ -8,6 +8,8 @@ use App\Http\Controllers\WeatherController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\AboutController;
+
 
 use App\Models\Gunung;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +31,7 @@ Route::get('/welcome', function () {
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 
 Route::get('/gunung/{mount}', [MountainController::class, 'show'])->name('mount.show');
+Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 Route::post('login', [LoginController::class, 'login']);
 

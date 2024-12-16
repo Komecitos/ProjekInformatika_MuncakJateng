@@ -15,8 +15,12 @@
                 <td>{{ $user->name ?? 'Data kosong'}}</td>
             </tr>
             <tr>
+                <th>Email</th>
+                <td>{{ $user->email ?? 'Data kosong'}}</td>
+            </tr>
+            <tr>
                 <th>ID Pendakian</th>
-                <td>{{ $order->id_pendakian ?? 'Data kosong'}}</td>
+                <td>{{ $id_pendakian ?? 'Data kosong'}}</td>
             </tr>
             <tr>
                 <th>Destinasi</th>
@@ -35,6 +39,7 @@
                 <td>Rp {{ number_format($total_price, 0, ',', '.') }}</td>
             </tr>
         </table>
+
         <input type="hidden" name="id_pemesanan" value="{{ $order->id_pemesanan }}">
         <input type="hidden" name="total_price" value="{{ $total_price }}">
         <input type="hidden" name="name" value="{{ $user->name ?? 'Pengguna' }}">
@@ -42,11 +47,10 @@
         <input type="hidden" name="destination" value="{{ $destination ?? 'Destinasi Tidak Tersedia' }}">
         <input type="hidden" name="trail" value="{{ $trail ?? 'Jalur Tidak Tersedia' }}">
         <input type="hidden" name="date" value="{{ $date ?? 'Tanggal Tidak Tersedia' }}">
-        <input type="hidden" name="date" value="{{ $order->id_pendakian ?? 'Id Pendakian Tidak Tersedia' }}">
+        <input type="hidden" name="id_pendakian" value="{{ $id_pendakian ?? 'Data kosong'}}">
 
         <button type="submit" class="btn btn-primary"><b>Pesan Tiket</b></button>
     </form>
 </div>
-
 
 @endsection

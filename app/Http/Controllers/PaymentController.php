@@ -19,7 +19,7 @@ class PaymentController extends Controller
         // Setup Midtrans configuration
         Config::$serverKey = env('MIDTRANS_SERVER_KEY');
         Config::$clientKey = env('MIDTRANS_CLIENT_KEY');
-        Config::$isProduction = false; // Ganti ke true untuk production
+        Config::$isProduction = false; 
         Config::$isSanitized = true;
         Config::$is3ds = true;
     }
@@ -36,7 +36,9 @@ class PaymentController extends Controller
             'destination' => 'required|string',
             'trail' => 'required|string',
             'date' => 'required|date',
+            'id_pendakian' => 'required|exists:pendakian,id_pendakian',
         ]);
+
 
         // Data transaksi dari form POST
         $transaction_details = [
@@ -72,6 +74,8 @@ class PaymentController extends Controller
             return view('ticket.pembayaran', [
                 'snapToken' => $snapToken,
                 'order_id' => $validated['id_pemesanan'],
+                'id_pendakian' => $validated['id_pendakian'],
+                'total_price' => $validated['total_price'],
             ]);
         } catch (\Exception $e) {
             Log::error('Midtrans Error: ' . $e->getMessage());
@@ -155,6 +159,7 @@ class PaymentController extends Controller
         $snapToken = $request->input('snap_token');
         $orderId = $request->input('order_id');
         $idPendakian = $request->input('id_pendakian'); // Pastikan id_pendakian dikirimkan dalam form request
+        $total_price = $request->input('total_price');
 
         // Pastikan data yang diperlukan ada
         if (empty($snapToken) || empty($orderId) || empty($idPendakian)) {
@@ -162,7 +167,8 @@ class PaymentController extends Controller
             Log::error('Data yang diperlukan tidak lengkap', [
                 'snap_token' => $snapToken,
                 'order_id' => $orderId,
-                'id_pendakian' => $idPendakian
+                'id_pendakian' => $idPendakian,
+                'total_price' => $total_price,
             ]);
 
             // Tindak lanjut: Misalnya redirect dengan error flash
@@ -184,7 +190,7 @@ class PaymentController extends Controller
             'order_id' => $orderId,
             'snap_token' => $snapToken,
             'status' => $status,
-            'amount' => $request->input('amount'), // Ambil jumlah dari parameter atau logika
+            'amount' => $request->input('total_price'), // Ambil jumlah dari parameter atau logika
             'payment_method' => $request->input('payment_method'), // Ambil payment method
             'response' => json_encode($request->all()), // Menyimpan semua data respons yang dikirimkan
             'id_pendakian' => $idPendakian, // Foreign key ke tabel pendakian
@@ -193,5 +199,4 @@ class PaymentController extends Controller
         // Tampilkan halaman notifikasi pembayaran atau informasi lebih lanjut
         return view('ticket.paymentNotif', compact('orderId', 'status', 'message', 'idPendakian'));
     }
-
 }

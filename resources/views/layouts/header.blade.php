@@ -24,7 +24,7 @@
                                     style="font-weight: normal;">Tiket</span></b></a> </li>
                     <li class="nav-item"> <a class="nav-link" href="#"><b class=""><span
                                     style="font-weight: normal;">Pesanan</span></b></a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="#"><b class=""><span
+                    <li class="nav-item"> <a class="nav-link" href="{{ route(name: 'about') }}"><b class=""><span
                                     style="font-weight: normal;">Tentang</span></b></a> </li>
                     <li class="nav-item"> <a class="nav-link" href="#"><b class=""><span
                                     style="font-weight: normal;">Profil</span></b></a> </li>

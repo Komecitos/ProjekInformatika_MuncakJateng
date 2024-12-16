@@ -18,7 +18,7 @@
         @csrf
         <input type="hidden" name="snap_token" id="snap_token" value="{{ $snapToken }}" />
         <input type="hidden" name="order_id" id="order_id" value="{{ $order_id }}" />
-        <input type="hidden" name="id_pendakian" value="{{ $idPendakian }}" /> <!-- Menyertakan ID Pendakian -->
+        <input type="hidden" name="id_pendakian" value="{{ $id_pendakian }}" /> <!-- Menyertakan ID Pendakian -->
         <button type="submit" class="btn btn-success" id="skip-button">Konfirmasi Pembayaran</button>
     </form>
 
