@@ -20,6 +20,7 @@ class Pembayaran extends Model
         'amount',
         'payment_method',
         'response',
+        'id_tiket',
     ];
 
     // Tentukan tipe data untuk atribut tertentu, jika diperlukan

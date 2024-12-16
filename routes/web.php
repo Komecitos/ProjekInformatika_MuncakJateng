@@ -9,6 +9,7 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AdminController;
 
 
 use App\Models\Gunung;
@@ -123,3 +124,11 @@ Route::get('/gunung/{nama_gunung}/jalur', function ($nama_gunung) {
     // Mengembalikan data via yang terkait dengan nama_gunung
     return response()->json($vias);
 });
+
+// admin
+Route::get('/admin/pendakian', [AdminController::class, 'index'])->name('admin.index');
+
+use App\Http\Controllers\PendakianController;
+
+Route::get('/cari-pendakian/{id_tiket}', [AdminController::class, 'cariPendakian'])
+    ->name('cari-pendakian');

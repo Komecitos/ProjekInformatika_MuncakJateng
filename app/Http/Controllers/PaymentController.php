@@ -10,6 +10,8 @@ use App\Models\Pembayaran; // Import model Pembayaran
 use App\Models\Pendakian;  // Import model Pendakian untuk validasi id_pendakian
 use App\Models\PemesananTiket;
 use Midtrans\Transaction;
+use Illuminate\Support\Str;
+
 
 
 class PaymentController extends Controller
@@ -19,7 +21,7 @@ class PaymentController extends Controller
         // Setup Midtrans configuration
         Config::$serverKey = env('MIDTRANS_SERVER_KEY');
         Config::$clientKey = env('MIDTRANS_CLIENT_KEY');
-        Config::$isProduction = false; 
+        Config::$isProduction = false;
         Config::$isSanitized = true;
         Config::$is3ds = true;
     }
@@ -160,6 +162,10 @@ class PaymentController extends Controller
         $orderId = $request->input('order_id');
         $idPendakian = $request->input('id_pendakian'); // Pastikan id_pendakian dikirimkan dalam form request
         $total_price = $request->input('total_price');
+        Log::info('Nilai total_price yang diterima:', [
+            'total_price' => $total_price
+        ]);
+
 
         // Pastikan data yang diperlukan ada
         if (empty($snapToken) || empty($orderId) || empty($idPendakian)) {
@@ -186,15 +192,18 @@ class PaymentController extends Controller
         }
 
         // Menyimpan data transaksi ke dalam tabel pembayaran_tiket
+
         Pembayaran::create([
             'order_id' => $orderId,
             'snap_token' => $snapToken,
             'status' => $status,
-            'amount' => $request->input('total_price'), // Ambil jumlah dari parameter atau logika
-            'payment_method' => $request->input('payment_method'), // Ambil payment method
-            'response' => json_encode($request->all()), // Menyimpan semua data respons yang dikirimkan
-            'id_pendakian' => $idPendakian, // Foreign key ke tabel pendakian
+            'amount' => $total_price,
+            'payment_method' => $request->input('payment_method'),
+            'response' => json_encode($request->all()),
+            'id_pendakian' => $idPendakian,
+            'id_tiket' => 'TICKET-' . now()->format('Ymd') . '-' . Str::random(8),
         ]);
+
 
         // Tampilkan halaman notifikasi pembayaran atau informasi lebih lanjut
         return view('ticket.paymentNotif', compact('orderId', 'status', 'message', 'idPendakian'));

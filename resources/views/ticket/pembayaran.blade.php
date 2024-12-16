@@ -7,6 +7,10 @@
         <tr>
             <th>Nomor Pemesanan</th>
             <td>{{ $order_id }}</td>
+            <th>Total Price</th>
+            <td>{{ $total_price }}</td>
+            <th>Id Pendakian</th>
+            <td>{{ $id_pendakian }}</td>
         </tr>
         <!-- Tambahkan detail tambahan seperti nama, destinasi, harga -->
     </table>
@@ -18,7 +22,8 @@
         @csrf
         <input type="hidden" name="snap_token" id="snap_token" value="{{ $snapToken }}" />
         <input type="hidden" name="order_id" id="order_id" value="{{ $order_id }}" />
-        <input type="hidden" name="id_pendakian" value="{{ $id_pendakian }}" /> <!-- Menyertakan ID Pendakian -->
+        <input type="hidden" name="total_price" id="total_price" value="{{ $total_price ?? 'default_value' }}" />
+        <input type="hidden" name="id_pendakian" id="id_pendakian" value="{{ $id_pendakian ?? 'default_value' }}" />
         <button type="submit" class="btn btn-success" id="skip-button">Konfirmasi Pembayaran</button>
     </form>
 
@@ -63,11 +68,28 @@
         event.preventDefault(); // Menghentikan aksi formulir
         console.log('Skipping payment, auto-confirming as success.');
 
+        // Log untuk memeriksa apakah elemen formulir ditemukan
+        console.log('Element snap_token:', document.getElementById('snap_token'));
+        console.log('Element order_id:', document.getElementById('order_id'));
+        console.log('Element id_pendakian:', document.getElementById('id_pendakian'));
+        console.log('Element total_price:', document.getElementById('total_price'));
+
+        // Set nilai untuk masing-masing elemen
         document.getElementById('snap_token').value = 'AUTO_CONFIRMED'; // Set token otomatis
-        document.getElementById('order_id').value = '{{ $order_id }}'; // Set order_id otomatis
+        console.log('snap_token set to:', document.getElementById('snap_token').value);
+
+        document.getElementById('order_id').value = '{{ $order_id }}';
+        console.log('order_id set to:', document.getElementById('order_id').value);
+
+        document.getElementById('id_pendakian').value = '{{ $id_pendakian }}';
+        console.log('id_pendakian set to:', document.getElementById('id_pendakian').value);
+
+        // document.getElementById('total_price').value = '{{ $total_price }}';
+        // console.log('total_price set to:', document.getElementById('total_price').value);
+
+        // Mengirimkan formulir
+        console.log('Submitting the form...');
         document.getElementById('payment-form').submit(); // Kirim form untuk menandai pembayaran berhasil
     };
 </script>
-<script src="js/pembayaran.js"></script>
 @endsection
-
