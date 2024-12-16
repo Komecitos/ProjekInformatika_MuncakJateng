@@ -37,6 +37,7 @@
             </div>
         </div>
     </nav>
+    @yield('content')
     <script src="{{ asset(path: 'js/headbar.js') }}"></script>
 </body>
 

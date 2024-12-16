@@ -1,33 +1,41 @@
-@extends('layouts.app')
+@extends('layouts.header')
 
 @section('content')
 <div class="container">
-    <h1>Detail Pemesanan Tiket #{{ $pemesanan->id }}</h1>
+    Tes
+    <h2>Detail Pemesanan Tiket</h2>
+    <table class="table table-bordered">
+        <tr>
+            <th>Nomor Pemesanan</th>
+            <td>{{ $order->nomor_pemesanan ?? 'Data kosong' }}</td>
+        </tr>
+        <tr>
+            <th>Nama Pengguna</th>
+            <td>{{ $user->name }}</td>
+        </tr>
+        <tr>
+            <th>Destinasi</th>
+            <td>{{ $destination }}</td>
+        </tr>
+        <tr>
+            <th>Jalur Pendakian</th>
+            <td>{{ $trail }}</td>
+        </tr>
+        <tr>
+            <th>Tanggal Pendakian</th>
+            <td>{{ $date }}</td>
+        </tr>
+        <tr>
+            <th>Total Pembayaran</th>
+            <td>Rp {{ number_format($total_price, 0, ',', '.') }}</td>
+        </tr>
+    </table>
 
-    <div class="card">
-        <div class="card-header">
-            Detail Pemesanan
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">Informasi Pendakian</h5>
-            <p class="card-text"><strong>ID Gunung:</strong> {{ $pemesanan->id_gunung }}</p>
-            <p class="card-text"><strong>ID Pendakian:</strong> {{ $pemesanan->pendakian->id_pendakian }}</p>
-            <p class="card-text"><strong>Tanggal Pendakian:</strong> {{ $pemesanan->pendakian->tanggal }}</p>
+    <a href="{{ route('payment.gateway', ['id_pemesanan' => $order->id_pemesanan]) }}" class="btn btn-primary">
+        Lanjutkan ke Pembayaran
+    </a>
 
-            <h5 class="card-title mt-4">Detail Pendaki</h5>
-            @foreach($pemesanan->pendakian->pendaki as $pendaki)
-                <ul>
-                    <li><strong>{{ $pendaki->nama_depan }} {{ $pendaki->nama_belakang }}</strong></li>
-                    <li><strong>Email:</strong> {{ $pendaki->email ?? 'N/A' }}</li>
-                    <li><strong>No. Telepon:</strong> {{ $pendaki->no_telepon }}</li>
-                    <li><strong>No. Telepon Darurat:</strong> {{ $pendaki->no_telepon_darurat ?? 'N/A' }}</li>
-                    <li><strong>Kewarganegaraan:</strong> {{ $pendaki->kewarganegaraan }}</li>
-                    <li><strong>Identitas:</strong> {{ $pendaki->jenis_identitas }} - {{ $pendaki->no_identitas }}</li>
-                    <li><strong>Alamat:</strong> {{ $pendaki->alamat }}</li>
-                    <hr>
-                </ul>
-            @endforeach
-        </div>
-    </div>
 </div>
+
+
 @endsection

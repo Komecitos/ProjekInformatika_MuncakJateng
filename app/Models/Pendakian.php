@@ -32,4 +32,9 @@ class Pendakian extends Model
     {
         return $this->hasMany(Pendaki::class, 'id_pendakian');
     }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'id_user', 'id');
+    }
 }

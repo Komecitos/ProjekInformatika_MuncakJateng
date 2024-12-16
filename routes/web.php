@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\WeatherController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\PaymentController;
 
 use App\Models\Gunung;
 use Illuminate\Support\Facades\Auth;
@@ -95,6 +96,15 @@ Route::get('/ticket', [TicketController::class, 'index'])->name('ticket.index');
 Route::get('/ticket/pemesanan/{id}', [TicketController::class, 'pemesanan'])->name('ticket.pemesanan');
 Route::post('/ticket/store', [TicketController::class, 'store'])->name('ticket.store');
 Route::get('/tickets/{id}', [TicketController::class, 'show'])->name('ticket.show');
+
+Route::get('/tickets/order/{order_id}', [TicketController::class, 'showOrder'])->name('ticket.order');
+Route::post('/payment/create', [PaymentController::class, 'createTransaction'])->name('payment.create');
+
+// Route untuk menangani callback notifikasi dari Midtrans
+Route::post('/payment/notification', [PaymentController::class, 'notificationHandler'])->name('payment.notification');
+Route::get('/payment/{id_pemesanan}', [PaymentController::class, 'paymentGateway'])->name('payment.gateway');
+Route::get('/payment/success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
+
 
 Route::get('/gunung', function () {
     $gunungData = Gunung::all();  // Mengambil semua gunung

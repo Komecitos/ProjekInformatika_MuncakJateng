@@ -6,6 +6,7 @@ use App\Models\Pendakian;
 use App\Models\Pendaki;
 use App\Models\PemesananTiket;
 use App\Models\Gunung;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -83,14 +84,14 @@ class TicketController extends Controller
         $jumlahPendaki = count($validated['f-name']);  // Berdasarkan banyaknya nama depan
 
         // Simpan Pemesanan Tiket
-        PemesananTiket::create([
+        $order =PemesananTiket::create([
             'id_via' => $validated['gunung'],
             'id_pendakian' => $pendakian->id_pendakian,
             'nomor_pemesanan' => $nomorPemesanan,
             'jumlah' => $jumlahPendaki,
         ]);
 
-        return redirect()->route('ticket.pemesanan', ['id' => $pendakian->id_pendakian]);
+        return redirect()->route('ticket.order', ['order_id' => $order->id_pemesanan]);
     }
 
 
@@ -129,6 +130,51 @@ class TicketController extends Controller
         // Kirim data ke view pemesanan
         return view('ticket.pemesanan', compact('pendakian', 'pendaki', 'gunung'));
     }
+
+    public function showOrder($order_id)
+    {
+        try {
+            // Log awal
+            Log::info('Memulai showOrder', ['order_id' => $order_id]);
+
+            // Ambil data PemesananTiket
+            $order = PemesananTiket::with(['pendakian.gunung'])
+                ->findOrFail($order_id);
+            Log::info('Order ditemukan', ['order' => $order]);
+
+            // Ambil data pengguna
+            $user = User::findOrFail($order->pendakian->id_user);
+            Log::info('Pengguna ditemukan', ['user' => $user]);
+
+            // Ambil data destinasi dan jalur
+            $destination = $order->pendakian->gunung->nama_gunung;
+            $trail = $order->pendakian->gunung->nama_via;
+            Log::info('Data destinasi dan jalur ditemukan', ['destination' => $destination, 'trail' => $trail]);
+
+            // Ambil tanggal pendakian
+            $date = $order->pendakian->tanggal;
+            Log::info('Tanggal pendakian ditemukan', ['date' => $date]);
+
+            // Hitung total harga
+            $ticket_price = $order->pendakian->gunung->harga_tiket;
+            $total_price = $ticket_price * $order->pendakian->jumlah;
+            Log::info('Total harga dihitung', ['ticket_price' => $ticket_price, 'total_price' => $total_price]);
+
+
+            // Kirim data ke view
+            return view('ticket.show', compact('order', 'user', 'destination', 'trail', 'date', 'total_price'));
+        } catch (\Exception $e) {
+            // Log error dan kembalikan respon dengan pesan error
+            Log::error('Terjadi kesalahan pada showOrder', [
+                'error_message' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+            ]);
+
+            return response()->view('errors.general', ['message' => 'Terjadi kesalahan'], 500);
+        }
+    }
+
+
 
 
 
