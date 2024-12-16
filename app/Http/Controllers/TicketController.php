@@ -157,12 +157,14 @@ class TicketController extends Controller
 
             // Hitung total harga
             $ticket_price = $order->pendakian->gunung->harga_tiket;
+            $nomor_pemesanan = $order->nomor_pemesanan;
+            $id_pendakian = $order->pendakian->id_pendakian;
+            Log:info('Nomor tiket ditemukan', ['nomor_pemesanan' => $nomor_pemesanan]);
             $total_price = $ticket_price * $order->pendakian->jumlah;
             Log::info('Total harga dihitung', ['ticket_price' => $ticket_price, 'total_price' => $total_price]);
 
-
             // Kirim data ke view
-            return view('ticket.show', compact('order', 'user', 'destination', 'trail', 'date', 'total_price'));
+            return view('ticket.show', compact('order', 'user', 'destination', 'trail', 'date', 'total_price', 'nomor_pemesanan', 'id_pendakian'));
         } catch (\Exception $e) {
             // Log error dan kembalikan respon dengan pesan error
             Log::error('Terjadi kesalahan pada showOrder', [

@@ -40,7 +40,7 @@ class LoginController extends Controller
         // Coba login
         if (Auth::attempt([$loginField => $request->login, 'password' => $request->password])) {
             Log::info('Login berhasil.', ['user_id' => Auth::id()]);
-            return redirect()->intended('/ticket');
+            return redirect()->intended('/home');
         }
 
         Log::error('Login gagal.', ['login' => $request->login]);

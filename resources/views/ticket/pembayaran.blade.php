@@ -1,48 +1,73 @@
 @extends('layouts.header')
 
 @section('content')
-<div class="container">
-    <h2>Detail Pemesanan Tiket</h2>
+<div class="container mt-5">
+    <h2 class="mb-4">Detail Pemesanan Tiket</h2>
     <table class="table table-bordered">
         <tr>
             <th>Nomor Pemesanan</th>
             <td>{{ $order_id }}</td>
         </tr>
-        <!-- Info lainnya seperti destinasi, tanggal, harga -->
+        <!-- Tambahkan detail tambahan seperti nama, destinasi, harga -->
     </table>
 
-    <h3>Silakan lakukan pembayaran</h3>
+    <h3 class="mt-4">Silakan lakukan pembayaran</h3>
+    <button id="pay-button" class="btn btn-primary mt-3">Bayar dengan Midtrans</button>
 
-    <!-- Tombol untuk lanjutkan pembayaran -->
-    <button id="pay-button">Bayar dengan Midtrans</button>
-
-    <form id="payment-form" action="/payment/success" method="POST" style="display:none;">
-        <input type="hidden" name="snap_token" id="snap_token" />
-        <button type="submit" class="btn btn-success">Konfirmasi Pembayaran</button>
+    <form id="payment-form" action="{{ route('payment.success') }}" method="POST">
+        @csrf
+        <input type="hidden" name="snap_token" id="snap_token" value="{{ $snapToken }}" />
+        <input type="hidden" name="order_id" id="order_id" value="{{ $order_id }}" />
+        <input type="hidden" name="id_pendakian" value="{{ $idPendakian }}" /> <!-- Menyertakan ID Pendakian -->
+        <button type="submit" class="btn btn-success" id="skip-button">Konfirmasi Pembayaran</button>
     </form>
+
+
+
 </div>
 
-<script type="text/javascript">
-    // Inisialisasi Snap Midtrans
+<!-- Midtrans Snap JS -->
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
+<script>
     document.getElementById('pay-button').onclick = function() {
-        // Mengambil Snap Token dari controller
+        console.log('Snap Pay triggered!');
         snap.pay('{{ $snapToken }}', {
             onSuccess: function(result) {
-                console.log(result);
+                console.log('Payment success:', result);
+                alert('Pembayaran berhasil!');
                 document.getElementById('snap_token').value = result.token;
+                document.getElementById('order_id').value = '{{ $order_id }}';
+
+                // Setelah pembayaran berhasil, kirim form secara otomatis
                 document.getElementById('payment-form').submit();
             },
             onPending: function(result) {
-                console.log(result);
-                alert("Pembayaran masih menunggu konfirmasi!");
+                console.log('Payment pending:', result);
+                alert('Pembayaran sedang diproses!');
+                document.getElementById('snap_token').value = result.token;
+                document.getElementById('order_id').value = '{{ $order_id }}';
                 document.getElementById('payment-form').submit();
             },
             onError: function(result) {
-                console.log(result);
-                alert("Terjadi masalah saat pembayaran.");
+                console.log('Payment error:', result);
+                alert('Terjadi kesalahan dalam pembayaran. Silakan coba lagi.');
+            },
+            onClose: function() {
+                alert('Pembayaran dibatalkan.');
             }
         });
     };
-</script>
 
+    // Fungsi untuk tombol 'skip' yang akan mengonfirmasi pembayaran sebagai berhasil
+    document.getElementById('skip-button').onclick = function(event) {
+        event.preventDefault(); // Menghentikan aksi formulir
+        console.log('Skipping payment, auto-confirming as success.');
+
+        document.getElementById('snap_token').value = 'AUTO_CONFIRMED'; // Set token otomatis
+        document.getElementById('order_id').value = '{{ $order_id }}'; // Set order_id otomatis
+        document.getElementById('payment-form').submit(); // Kirim form untuk menandai pembayaran berhasil
+    };
+</script>
+<script src="js/pembayaran.js"></script>
 @endsection
+

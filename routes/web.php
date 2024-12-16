@@ -102,8 +102,9 @@ Route::post('/payment/create', [PaymentController::class, 'createTransaction'])-
 
 // Route untuk menangani callback notifikasi dari Midtrans
 Route::post('/payment/notification', [PaymentController::class, 'notificationHandler'])->name('payment.notification');
-Route::get('/payment/{id_pemesanan}', [PaymentController::class, 'paymentGateway'])->name('payment.gateway');
-Route::get('/payment/success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
+Route::post('/payment/gateway', [PaymentController::class, 'paymentGateway'])->name('payment.gateway');
+Route::post('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
+Route::post('/midtrans-webhook', [PaymentController::class, 'webhookHandler']);
 
 
 Route::get('/gunung', function () {
